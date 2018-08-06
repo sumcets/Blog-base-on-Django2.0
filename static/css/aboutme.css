@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #cddc3959;
+    height: 100%;
+}
+
+.aboutme {
+    width: 80%;
+    height: 80%;
+    margin: 100px auto;
+    background-color: #fff;
+    margin-top: 0;
+    border: silver solid 2px;
+}
+
+html {
+    height: 100%;
+}
+
+.footer p {
+    display: inline-block;
+    width: auto;
+    margin: 0 auto;
+    position: absolute;
+    left: 45%;
+}
+
+.text {
+    text-align: center;
+}

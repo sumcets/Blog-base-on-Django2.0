@@ -1,0 +1,48 @@
+html{
+  height: 100%;
+}
+
+body{
+    height: 100%;
+    background-color: #f0eef5;
+}
+
+.top_picture{
+  width: 100%;
+  padding: 0;
+  height: 30%;
+  background-image: url(/static/media/page_title.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 20px;
+}
+
+.rigth_bar{
+    left: auto!important;
+    right: 167px!important;
+}
+
+.font_logreg{
+    font-weight: 900;
+    font-family: SimHei;
+}
+
+.up_bar{
+  margin-bottom: 0;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: rgba(0,0,0,0);
+  border-color: rgba(0,0,0,0);
+}
+
+.active_font{
+    font-weight: 700;
+}
+
+.btn-group{
+    bottom: -9px;
+}
+ol{
+    background-color: #265e8f59!important;
+}

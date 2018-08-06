@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+登陆
+{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block bar %}
+{% endblock %}
+
+{% block mianbaoxie %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'index' %}">首页</a></li>
+  <li class="active">登陆</li>
+</ol>
+{% endblock %}
+{% block content %}
+<div class="form">
+    <form class="login" action="{% url 'login' %}" method="post">
+      <p>欢迎登陆</p>
+      <input type="text" name="username" value="{% if loginform.username.value is not None %}{{ loginform.username.value }}{% endif %}" placeholder="用户名或邮箱" class="form-control">
+      <br>
+      <input type="password" name="password" value="{% if loginform.password.value is not None %}{{ loginform.password.value }}{% endif %}" placeholder="密码" class="form-control">
+      <br>
+    <div class="cap">
+        {{ loginform.captcha }}
+    </div>
+
+{#      <input type="text" name="v_code" value="" placeholder="验证码" class="form-control inp2">#}
+        {% if loginform.errors or error_message %}
+
+        <div class="alert alert-danger login_error_msg " role="alert">{{ error_message }}{% for key, value in loginform.errors.items %}{{ value }}{% endfor %}</div>
+
+        {% endif %}
+      <button type="submit" class="btn btn-primary btn-block">登陆</button>
+      <a href="{% url 'resetlink' %}" class="find_pwd">找回密码</a>
+      <a href="{% url 'register' %}" class="reg">现在注册</a>
+        {% csrf_token %}
+    </form>
+  </div>
+{% endblock %}

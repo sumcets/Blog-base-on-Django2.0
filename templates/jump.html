@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WARNING</title>
+    <link rel="icon" href="{% static '/media/sumcet_blog.ico' %}">
+    <script type="application/javascript">
+        setTimeout("javascript:location.href='http://127.0.0.1:8000'", 1500);
+    </script>
+    <style type="text/css">
+        h2 {
+            position: absolute;
+            left: 35%;
+            top: 35%;
+        }
+    </style>
+</head>
+<body>
+<h2>{{ msg }}</h2>
+</body>
+</html>

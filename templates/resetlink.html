@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/resetlink.css' %}">
+{% endblock %}
+
+{% block title %}
+重置链接
+{% endblock %}
+
+{% block bar %}
+{% endblock %}
+
+{% block mianbaoxie %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'index' %}">首页</a></li>
+    <li><a href="{% url 'login' %}">首页</a></li>
+  <li class="active">重置链接</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="form">
+    <form class="login" action="{% url 'resetlink' %}" method="post">
+      <p>输入注册的邮箱地址</p>
+      <input type="email" name="email" value="{% if reset_link.email.value is not None %}{{ reset_link.email.value }}{% endif %}" placeholder="邮箱" class="form-control inp1">
+      <br>
+        <div class="cap">
+             {{ reset_link.captcha }}
+        </div>
+        {% if reset_link.errors or msg %}
+
+        <div class="alert alert-danger login_error_msg " role="alert">{{ msg }}{% for key, value in reset_link.errors.items %}{{ value }}{% endfor %}</div>
+
+        {% endif %}
+      <button type="submit" class="btn btn-primary btn-block">确定</button>
+        {% csrf_token %}
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block title %}
+    学无止境
+{% endblock %}
+{% block login %}
+    href="{% url 'login' %}?from={{ request.path }}"
+{% endblock %}
+
+{% block mianbaoxie %}
+    <ol class="breadcrumb">
+        <li><a href="{% url 'index' %}">首页</a></li>
+        <li class="active">学无止境</li>
+    </ol>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <!-- 主内容 -->
+            <div class="col-xs-12 col-sm-10 col-md-8">
+                <!-- detail页面在此处继承 -->
+                {% block blog_detial %}
+                    {% for contact in contacts %}
+                        <div class="d1">
+                        <span class="btn btn-success blog_type">{{ contact.share_type.typeName }}</span>
+                            <a href="{% url 'blogDetail' contact.id %}"><strong style="font-size: 18px">{{ contact.name }}</strong></a>
+                            <p>{{ contact.share_content|safe|striptags|truncatechars:300 }}<a
+                                    href="{% url 'learnDetail' contact.id %}">阅读全文</a></p>
+                        </div>
+                    {% endfor %}
+                    {#分页#}
+                    <nav aria-label="...">
+                        <ul class="pager">
+                            {% if contacts.start_index == 1 %}
+                                <li class="next"><a href="?page={{ contacts.next_page_number }}">下一页</a></li>
+                            {% endif %}
+                            {% if contacts.paginator.count == contacts.end_index %}
+                                <li class="next"><span>到底了</span></li>
+                                <li class="next"><a href="?page={{ contacts.previous_page_number }}">上一页</a></li>
+                            {% endif %}
+                            {% if contacts.has_previous and contacts.has_next %}
+                                <li class="next"><a href="?page={{ contacts.next_page_number }}">下一页</a></li>
+                                <li class="next"><a href="?page={{ contacts.previous_page_number }}">上一页</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endblock %}
+            </div>
+            <!-- 侧边栏 -->
+            <div class="hidden-xs hidden-sm col-md-4">
+                {% block right_detail %}
+                    <div class="d4">
+                        <a href="{% url 'aboutme' %}"><strong>关于我</strong></a>
+                        <p>关于你，2012年的九月，那是我们认识的季节，在四十多</p>
+                    </div>
+                {% endblock %}
+                <div class="d4">
+                    <a href="#"><strong>标签</strong></a>
+                    {% for tag in tags %}
+                    <span class="{{ tag.color }}">{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+                <div class="d4">
+                    <p class="d4_hot">热门推荐</p>
+                    {% for hot_blog in hot_blogs %}
+                    <h5><span class="label label-warning">New</span>：<a style="display: inline" href="{% url 'blogDetail' hot_blog.id %}">{{ hot_blog.name }}</a></h5>
+                    {% endfor %}
+                </div>
+                <div class="d4">
+                    <p class="d4_hot">最新评论</p>
+                    {% for hot_comment in hot_comments %}
+                    <h5><span class="label label-danger">New</span>：{{ hot_comment.comment_content|safe|striptags }}</h5>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    评论框#}
+    {% block comment %}
+
+    {% endblock %}
+
+{% endblock %}

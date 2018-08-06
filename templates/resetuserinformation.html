@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/resetuser.css' %}">
+{% endblock %}
+
+{% block title %}
+重置用户信息
+{% endblock %}
+
+{% block bar %}
+{% endblock %}
+
+{% block mianbaoxie %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'index' %}">首页</a></li>
+    <li><a href="{% url 'login' %}">首页</a></li>
+  <li class="active">重置信息</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="form">
+    <form class="login" action="{% url 'resetuser' reset_code %}" method="post">
+      <p>重置信息:{{ email }}</p>
+      <input type="text" name="username" value="{% if resetUserInformation_forms.username.value is not None %}{{ resetUserInformation_forms.username.value }}{% endif %}" placeholder="用户名" class="form-control inp2">
+      <br>
+    <input type="password" name="password" value="{% if resetUserInformation_forms.password.value is not None %}{{ resetUserInformation_forms.password.value }}{% endif %}" placeholder="密码" class="form-control inp2">
+      <br>
+        <div class="cap">
+             {{ resetUserInformation_forms.captcha }}
+        </div>
+        {% if resetUserInformation_forms.errors or msg %}
+
+        <div class="alert alert-danger login_error_msg " role="alert">{{ msg }}{% for key, value in resetUserInformation_forms.errors.items %}{{ value }}{% endfor %}</div>
+
+        {% endif %}
+      <button type="submit" class="btn btn-primary btn-block">重置</button>
+        {% csrf_token %}
+    </form>
+  </div>
+{% endblock %}
